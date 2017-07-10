@@ -1,0 +1,8 @@
+kz\epam\javalab22\parsing\iostream\FileReader.class
+kz\epam\javalab22\parsing\entity\Symbol.class
+kz\epam\javalab22\parsing\operation\Corrector.class
+kz\epam\javalab22\parsing\entity\Text.class
+kz\epam\javalab22\parsing\iostream\FileWriter.class
+kz\epam\javalab22\parsing\entity\CompositeText.class
+kz\epam\javalab22\parsing\operation\Parser.class
+kz\epam\javalab22\parsing\runner\Runner.class
