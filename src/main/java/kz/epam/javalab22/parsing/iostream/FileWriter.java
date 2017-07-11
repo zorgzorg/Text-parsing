@@ -4,13 +4,14 @@ import java.io.*;
 
 public class FileWriter {
 
-    public static void write(String fileName, String text) {
+    public static void write(String fileName, String text, String encoding) {
         try {
-            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
-            out.write(text.toString());
-            out.close();
+            Writer writer = new OutputStreamWriter(new FileOutputStream(fileName), encoding);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.write(text.toString());
+            bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

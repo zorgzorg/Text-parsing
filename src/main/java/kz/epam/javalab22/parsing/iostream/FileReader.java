@@ -1,22 +1,27 @@
 package kz.epam.javalab22.parsing.iostream;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.*;
 
 public class FileReader {
-    public static String read(String fileName) {
-        final String DELIMITER_PATTERN = "\\Z";
+    private static final int EOF = -1;
 
-        InputStream is = null;
+    public static String read(String fileName, String encoding){
+
+        String sourceText = new String();
+
         try {
-            is = new FileInputStream(fileName);
-        } catch (FileNotFoundException e) {
+            Reader reader = new InputStreamReader(new FileInputStream(fileName), encoding);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            int s;
+
+            while ((s=bufferedReader.read())!=EOF) {
+                sourceText += (char)s;
+            }
+
+            bufferedReader.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String sourceText = new Scanner(is).useDelimiter(DELIMITER_PATTERN).next();
 
         return sourceText;
     }

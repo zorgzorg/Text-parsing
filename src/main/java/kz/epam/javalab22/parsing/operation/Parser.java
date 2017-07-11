@@ -4,7 +4,7 @@ import kz.epam.javalab22.parsing.entity.*;
 
 public class Parser {
     public static final String PARAGRAPH_SPLIT_PATTERN = "(?=(\\n|\\rn|\\r))";
-    public static final String SENTENCE_SPLIT_PATTERN = "(?=(\\.|!|\\?))";
+    public static final String SENTENCE_SPLIT_PATTERN = "(?<=(\\.|!|\\?))";
     public static final String WORD_SPLIT_PATTERN = "(?<=\\s)|(?=\\s)|(?=\\p{P})|(?<=\\p{P})";
 
     public static CompositeText parseText(String source){
@@ -36,6 +36,7 @@ public class Parser {
 
         for(String word: words){
             sentence.add(parseWord(word));
+
         }
 
         return sentence;

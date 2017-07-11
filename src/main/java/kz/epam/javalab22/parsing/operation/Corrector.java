@@ -12,25 +12,32 @@ import java.util.List;
  */
 
 public class Corrector {
+    private static final String WRONG_SYMBOL = "а";
+    private static final String CORRECT_SYMBOL = "о";
+    private static final String SEARCHED_SYMBOL = "р";
+
     public static void correct(CompositeText text){
-        Symbol symbolNew = new Symbol('o');
+        Symbol symbolNew = new Symbol(CORRECT_SYMBOL.charAt(0));
 
         for(Text paragraph: text.getChildComponent()){
             for(Text sentence: ((CompositeText) paragraph).getChildComponent()){
                 for(Text word: ((CompositeText) sentence).getChildComponent()){
-                    if(word.toString().contains("ра") || word.toString().contains("Ра") || word.toString().contains("РА") || word.toString().contains("рА")){
+                    if(word.toString().contains(SEARCHED_SYMBOL+WRONG_SYMBOL) ||
+                       word.toString().contains(SEARCHED_SYMBOL.toUpperCase()+WRONG_SYMBOL) ||
+                       word.toString().contains((SEARCHED_SYMBOL+WRONG_SYMBOL).toUpperCase()) ||
+                       word.toString().contains(SEARCHED_SYMBOL+WRONG_SYMBOL.toUpperCase())
+                       ){
                        List<Text> symbols = ((CompositeText) word).getChildComponent();
                          for(int i = 0; i < symbols.size(); i++) {
                             Symbol symbol = (Symbol) symbols.get(i);
-                            if("р".equals(symbol.toString()) || "Р".equals(symbol.toString())) {
+                            if(SEARCHED_SYMBOL.equals(symbol.toString()) || SEARCHED_SYMBOL.toUpperCase().equals(symbol.toString())) {
                                 if(i < symbols.size()) {
-                                    Symbol symbolNext = (Symbol) symbols.get(i+1);
-                                    if("а".equals(symbolNext.toString()) || "А".equals(symbolNext.toString())) {
-                                        symbols.remove(i + 1);
-                                        if("А".equals(symbolNext.toString())) {
-                                            symbolNew = new Symbol('О');
+                                    Symbol symbolNext = (Symbol) symbols.get(i + 1);
+                                    if(WRONG_SYMBOL.equals(symbolNext.toString()) || WRONG_SYMBOL.toUpperCase().equals(symbolNext.toString())) {
+                                        if(WRONG_SYMBOL.toUpperCase().equals(symbolNext.toString())) {
+                                            symbolNew = new Symbol(CORRECT_SYMBOL.toUpperCase().charAt(0));
                                         }
-                                        symbols.add(i + 1, symbolNew);
+                                        symbols.set(i + 1, symbolNew);
                                     }
                                 }
                             }

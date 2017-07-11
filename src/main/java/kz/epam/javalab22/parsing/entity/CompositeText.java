@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompositeText implements Text {
-
     private List<Text> childComponent = new ArrayList<Text>();
 
     public void add(Text component){
